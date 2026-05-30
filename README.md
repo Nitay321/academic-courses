@@ -1,11 +1,14 @@
-# 🎓 Accelerated Numerical Linear Algebra (NLA) & Optimization (OPT) Study Guide
+# 🎓 Academic Mastery Portal: NLA & OPT + Probability & Statistics
 
-Welcome to the **Accelerated NLA & OPT Study Guide**—a bespoke, highly interactive, and premium educational web application built to master advanced concepts in **Numerical Linear Algebra** and **Mathematical Optimization** with maximum retention and speed.
+Welcome to the **Academic Mastery Portal**—a bespoke, highly interactive, and premium educational web application built to master advanced concepts in **Numerical Linear Algebra (NLA) & Optimization (OPT)** and **Probability & Mathematical Statistics (Prob & Stats)** with maximum retention and speed.
 
 > [!IMPORTANT]
 > **🚀 Accelerated Learning Experience**: This interactive guide was custom-built to help me learn and master these complex mathematical and computational topics **significantly faster** than traditional methods. By transforming static lecture notes into dynamic, chunked modules, active recall quizzes, and a searchable progress-tracked formula hub, it has dramatically compressed my learning curve.
 > 
+> **🔮 Future Expansion**: The platform is structured to support multiple mathematical and computer science disciplines. **More premium courses are coming soon!**
+> 
 > **🤖 Created with Antigravity**: This entire portal was co-created, coded, and iterated from scratch in collaboration with **Antigravity (by Google DeepMind)**, a cutting-edge agentic AI coding assistant. By combining advanced AI capabilities with developer intent, we built a fully-featured React + TypeScript + Vite portal with beautiful animations and a database backend in record time!
+
 
 ---
 
