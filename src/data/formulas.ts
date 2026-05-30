@@ -1301,7 +1301,7 @@ export const formulas: Formula[] = [
     categoryHe: 'פותרי מערכות איטרטיביים',
     name: 'SOR Iteration Scheme',
     nameHe: 'אלגוריתם איטרטיבי SOR',
-    equation: 'x_i^{(k+1)} = (1 - \\omega)x_i^{(k)} + \\frac{\\omega}{a_{ii}} \\left[ b_i - \\sum_{j < i} a_{ij}x_j^{(k+1)} - \\sum_{j > i} a_{ij}x_j^{(k)} \\right]',
+    equation: 'x_i^{(k+1)} = (1 - \\omega)x_i^{(k)} + \\frac{\\omega}{a_{ii}} \\left[ b_i - \\sum_{j \\lt i} a_{ij}x_j^{(k+1)} - \\sum_{j \\gt i} a_{ij}x_j^{(k)} \\right]',
     description: 'Accelerated relaxation solver governed by parameter ω. Ostrowski-Reich guarantees convergence for SPD systems iff 0 < ω < 2.',
     descriptionHe: 'שיטת פתרון מואצת המבוססת על שילוב מקדם משקל ω. משפט אוסטרובסקי-רייך מבטיח התכנסות עבור מטריצות SPD אם ורק אם מקדם ההרפיה ω גדול מ-0 וקטן מ-2.'
   },
@@ -1435,7 +1435,7 @@ export const formulas: Formula[] = [
     categoryHe: 'יסודות האופטימיזציה',
     name: 'Strongly Convex Function',
     nameHe: 'פונקציה קמורה חזק',
-    equation: 'f(y) \\geq f(x) + \\nabla f(x)^T(y-x) + \\frac{\\mu}{2}\\|y-x\\|^2, \\quad \\mu > 0',
+    equation: 'f(y) \\geq f(x) + \\nabla f(x)^T(y-x) + \\frac{\\mu}{2}\\|y-x\\|^2, \\quad \\mu \\gt 0',
     description: 'Stronger than convexity: guarantees a unique global minimum and linear convergence rate for gradient descent.',
     descriptionHe: 'תנאי חזק מקמירות רגילה: מבטיח קיום של נקודת מינימום גלובלי יחידה וקצב התכנסות ליניארי מובטח עבור שיטת ירידת הגרדיאנט.'
   },
@@ -1501,7 +1501,7 @@ export const formulas: Formula[] = [
     categoryHe: 'אופטימיזציה ללא אילוצים',
     name: 'Descent Direction Condition',
     nameHe: 'תנאי כיוון ירידה',
-    equation: '\\langle \\nabla f(x^{(k)}), d \\rangle < 0 \\implies d = -M \\nabla f(x^{(k)}) \\quad (M \\succ 0)',
+    equation: '\\langle \\nabla f(x^{(k)}), d \\rangle \\lt 0 \\implies d = -M \\nabla f(x^{(k)}) \\quad (M \\succ 0)',
     description: 'Establishes that vector d is a descent direction if its inner product with the gradient is negative. Any positive-definite scaling M guarantees this.',
     descriptionHe: 'קובע כי וקטור d הוא כיוון ירידה אם המכפלה הפנימית שלו עם הגרדיאנט היא שלילית. כפל במטריצה חיובית לחלוטין M מבטיח זאת תמיד.'
   },
@@ -1699,7 +1699,7 @@ export const formulas: Formula[] = [
     categoryHe: 'אופטימיזציה עם אילוצים',
     name: '2nd-Order Sufficient Condition (Constrained)',
     nameHe: 'תנאי מספיק מסדר שני עם אילוצים',
-    equation: 'y^T \\nabla^2_x L(x^*, \\lambda^*) y > 0 \\quad \\forall y \\neq 0 \\text{ s.t. } J_{\\text{eq}} y = 0',
+    equation: 'y^T \\nabla^2_x L(x^*, \\lambda^*) y \\gt 0 \\quad \\forall y \\neq 0 \\text{ s.t. } J_{\\text{eq}} y = 0',
     description: 'At a KKT point, if the Hessian of the Lagrangian is positive definite on the constraint null-space, then x* is a strict local minimum.',
     descriptionHe: 'בנקודת KKT, אם מטריצת ההסיאן של הלגראנז\'יאן היא חיובית לחלוטין מעל מרחב האפס (Null space) של היעקוביאן של האילוצים הפעילים, אזי x* מובטחת להיות נקודת מינימום מקומי קשיח.'
   },
@@ -1721,7 +1721,7 @@ export const formulas: Formula[] = [
     categoryHe: 'אופטימיזציה עם אילוצים',
     name: 'Box-Constraint Projection',
     nameHe: 'היטל על אילוצי קופסה/תיבה',
-    equation: 'x^{(k+1)}_i = \\begin{cases} a_i & z_i < a_i \\\\ b_i & z_i > b_i \\\\ z_i & \\text{otherwise} \\end{cases}, \\quad z = x^{(k)} - \\alpha \\nabla f',
+    equation: 'x^{(k+1)}_i = \\begin{cases} a_i & z_i \\lt a_i \\\\ b_i & z_i \\gt b_i \\\\ z_i & \\text{otherwise} \\end{cases}, \\quad z = x^{(k)} - \\alpha \\nabla f',
     description: 'Projected SD for box constraints a ≤ x ≤ b. The projection simply clips each coordinate to the nearest bound — computed in O(n).',
     descriptionHe: 'מנגנון הטלה עבור אילוצי תיבה a ≤ x ≤ b. ההטלה פשוט קוטמת/חוסמת כל רכיב בוקטור לגבול הקרוב אליו ביותר. חישוב זה מבוצע בסיבוכיות ליניארית מהירה O(n).'
   },
