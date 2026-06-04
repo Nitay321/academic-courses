@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
-import { useState, useEffect, createContext, useContext } from 'react';
+import { useState, useEffect, createContext, useContext, useRef } from 'react';
 import Home from './pages/Home';
 import ChapterPage from './pages/ChapterPage';
 import FormulaBoard from './pages/FormulaBoard';
@@ -904,8 +904,8 @@ function Navigation() {
           position: 'relative'
         }}>
           
-          {/* Group 1: Navigation Links (Left-docked) */}
-          <div className="nav-left-group" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flexShrink: 0 }}>
+          {/* Group 1: Navigation Links (Left-docked with symmetric flex-grow) */}
+          <div className="nav-left-group" style={{ display: 'flex', gap: '0.75rem', alignItems: 'center', flex: '1 1 0%', justifyContent: 'flex-start', flexShrink: 0 }}>
             <Link to="/" className={`btn ${location.pathname === '/' ? 'btn-primary' : 'btn-secondary'}`} style={{ padding: '0.65rem 1.25rem', fontSize: '0.95rem', height: '2.625rem' }}>
               <HomeIcon size={18} /> {tDashboard}
             </Link>
@@ -915,59 +915,85 @@ function Navigation() {
           </div>
 
           {/* Group 2: Premium Subject Switcher Toggle Container (Centered Symmetrically!) */}
-          <div style={{
-            display: 'flex',
-            gap: '0.35rem',
-            background: 'rgba(255, 255, 255, 0.05)',
-            padding: '0.2rem',
-            borderRadius: '1.25rem',
-            border: '1px solid var(--surface-border)',
-            height: '2.625rem',
-            alignItems: 'center',
-            flexShrink: 0
-          }}>
-            {subjects.map(sub => {
-              const isActive = activeSubject.id === sub.id;
-              const title = isHe ? sub.titleHe : sub.title;
-              const shortLabel = sub.id === 'nla-opt' 
-                ? (isHe ? 'אלגברה ואופטימיזציה' : 'NLA & OPT') 
-                : (isHe ? 'הסתברות וסטטיסטיקה' : 'Prob & Stats');
-              return (
-                <button
-                  key={sub.id}
-                  onClick={() => {
-                    const currentPath = location.pathname;
-                    setSubjectById(sub.id);
-                    if (currentPath.includes('chapter')) {
-                      navigate('/');
-                    } else if (currentPath.includes('formulas')) {
-                      navigate('/formulas');
-                    } else {
-                      navigate('/');
-                    }
-                  }}
-                  style={{
-                    padding: '0.35rem 0.85rem',
-                    fontSize: '0.82rem',
-                    borderRadius: '1rem',
-                    background: isActive ? 'var(--primary-color)' : 'transparent',
-                    color: isActive ? 'white' : 'var(--text-secondary)',
-                    border: 'none',
-                    cursor: 'pointer',
-                    fontWeight: 'bold',
-                    transition: 'all 0.25s ease',
-                    boxShadow: isActive ? '0 2px 8px rgba(0, 0, 0, 0.15)' : 'none'
-                  }}
-                  title={title}
-                >
-                  {shortLabel}
-                </button>
-              );
-            })}
+          <div className="nav-center-group" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flex: '0 0 auto', flexShrink: 0 }}>
+            <div style={{
+              display: 'flex',
+              gap: '0.35rem',
+              background: 'rgba(255, 255, 255, 0.05)',
+              padding: '0.2rem',
+              borderRadius: 'var(--radius-sm)',
+              border: '1px solid var(--surface-border)',
+              height: '2.625rem',
+              alignItems: 'center',
+              width: '17rem'
+            }}>
+              {subjects.map(sub => {
+                const isActive = activeSubject.id === sub.id;
+                const title = isHe ? sub.titleHe : sub.title;
+                const shortLabel = sub.id === 'nla-opt' 
+                  ? (isHe ? 'אלגברה ואופטימיזציה' : 'NLA & OPT') 
+                  : (isHe ? 'הסתברות וסטטיסטיקה' : 'Prob & Stats');
+
+                // Each subject gets its own hardcoded color identity — prevents color bleeding when switching domains
+                const subjectColor = sub.id === 'nla-opt'
+                  ? { bg: '#6366f1', text: 'white', shadow: '0 2px 8px rgba(99, 102, 241, 0.40)', hoverBg: 'rgba(99, 102, 241, 0.10)' }
+                  : { bg: '#10b981', text: 'white', shadow: '0 2px 8px rgba(16, 185, 129, 0.40)', hoverBg: 'rgba(16, 185, 129, 0.10)' };
+
+                return (
+                  <button
+                    key={sub.id}
+                    onClick={() => {
+                      const currentPath = location.pathname;
+                      setSubjectById(sub.id);
+                      if (currentPath.includes('chapter')) {
+                        navigate('/');
+                      } else if (currentPath.includes('formulas')) {
+                        navigate('/formulas');
+                      } else {
+                        navigate('/');
+                      }
+                    }}
+                    style={{
+                      padding: '0.35rem 0.2rem',
+                      fontSize: '0.82rem',
+                      borderRadius: 'calc(var(--radius-sm) - 2px)',
+                      background: isActive ? subjectColor.bg : 'transparent',
+                      color: isActive ? subjectColor.text : 'var(--text-secondary)',
+                      border: 'none',
+                      cursor: 'pointer',
+                      fontWeight: 'bold',
+                      transition: 'all 0.25s ease',
+                      boxShadow: isActive ? subjectColor.shadow : 'none',
+                      height: 'calc(2.625rem - 0.4rem - 2px)',
+                      flex: 1,
+                      textAlign: 'center',
+                      whiteSpace: 'nowrap',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis'
+                    }}
+                    title={title}
+                    onMouseEnter={(e) => {
+                      if (!isActive) {
+                        e.currentTarget.style.background = subjectColor.hoverBg;
+                        e.currentTarget.style.color = subjectColor.bg;
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isActive) {
+                        e.currentTarget.style.background = 'transparent';
+                        e.currentTarget.style.color = 'var(--text-secondary)';
+                      }
+                    }}
+                  >
+                    {shortLabel}
+                  </button>
+                );
+              })}
+            </div>
           </div>
 
-          {/* Group 3: Sync Pill status and User Profile dropdown (Right-docked) */}
-          <div className="nav-right-group" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexShrink: 0 }}>
+          {/* Group 3: Sync Pill status and User Profile dropdown (Right-docked with symmetric flex-grow) */}
+          <div className="nav-right-group" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flex: '1 1 0%', justifyContent: 'flex-end', flexShrink: 0 }}>
             
             {/* Sync Pill (State reactive PWA cloud/local indicator) */}
             <div 
@@ -1303,7 +1329,7 @@ const FragmentWrapper: React.FC<{ children: React.ReactNode }> = ({ children }) 
 function FloatingDock({ theme, toggleTheme }: { theme: 'dark' | 'light'; toggleTheme: () => void }) {
   const { language, toggleLanguage, zoom, zoomIn, zoomOut, openShareModal } = useAppContext();
   const isHe = language === 'he';
-  const dir = isHe ? 'rtl' : 'ltr';
+  const dockRef = useRef<HTMLDivElement>(null);
 
   const [isCollapsed, setIsCollapsed] = useState(() => {
     return localStorage.getItem('dock_collapsed') === 'true';
@@ -1331,18 +1357,82 @@ function FloatingDock({ theme, toggleTheme }: { theme: 'dark' | 'light'; toggleT
     localStorage.setItem('dock_position', JSON.stringify(nextPos));
   };
 
+  // Keep the dock within the viewport boundaries
+  useEffect(() => {
+    const handleResize = () => {
+      const margin = 20; // safe margin from edges
+      const dockWidth = dockRef.current?.offsetWidth || 54;
+      const dockHeight = dockRef.current?.offsetHeight || (isCollapsed ? 60 : 380);
+      
+      // The initial position is at top: 40px (2.5rem), right: 40px (2.5rem).
+      // So initial top = 40, initial left = window.innerWidth - 40 - dockWidth.
+      const initialTop = 40;
+      const initialLeft = window.innerWidth - 40 - dockWidth;
+      
+      // Current top = initialTop + position.y
+      // Current left = initialLeft + position.x
+      const currentTop = initialTop + position.y;
+      const currentLeft = initialLeft + position.x;
+      
+      let nextX = position.x;
+      let nextY = position.y;
+      
+      // Constrain Left/Right
+      if (currentLeft < margin) {
+        nextX = margin - initialLeft;
+      } else if (currentLeft + dockWidth > window.innerWidth - margin) {
+        nextX = window.innerWidth - margin - dockWidth - initialLeft;
+      }
+      
+      // Constrain Top/Bottom
+      if (currentTop < margin) {
+        nextY = margin - initialTop;
+      } else if (currentTop + dockHeight > window.innerHeight - margin) {
+        nextY = window.innerHeight - margin - dockHeight - initialTop;
+      }
+      
+      if (nextX !== position.x || nextY !== position.y) {
+        const constrainedPos = { x: nextX, y: nextY };
+        setPosition(constrainedPos);
+        localStorage.setItem('dock_position', JSON.stringify(constrainedPos));
+      }
+    };
+    
+    // Add small delay to let height transition complete/start before clamping
+    const timer = setTimeout(handleResize, 50);
+    window.addEventListener('resize', handleResize);
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isCollapsed, position.x, position.y]);
+
+  const margin = 20;
+  const dockWidth = dockRef.current?.offsetWidth || 54;
+  const dockHeight = dockRef.current?.offsetHeight || (isCollapsed ? 60 : 380);
+
+  const initialTop = 40;
+  const initialLeft = window.innerWidth - 40 - dockWidth;
+
+  const minX = margin - initialLeft;
+  const maxX = window.innerWidth - margin - dockWidth - initialLeft;
+  const minY = margin - initialTop;
+  const maxY = window.innerHeight - margin - dockHeight - initialTop;
+
   return (
     <motion.div
+      ref={dockRef}
       drag
+      dragConstraints={{ left: minX, right: maxX, top: minY, bottom: maxY }}
       dragMomentum={false}
-      dragElastic={0.05}
+      dragElastic={0}
       onDragEnd={handleDragEnd}
       animate={{ x: position.x, y: position.y }}
       style={{
         position: 'fixed',
         top: '2.5rem',
-        left: isHe ? '2.5rem' : 'auto',
-        right: isHe ? 'auto' : '2.5rem',
+        left: 'auto',
+        right: '2.5rem',
         zIndex: 9999,
         display: 'flex',
         flexDirection: 'column',
@@ -1359,7 +1449,7 @@ function FloatingDock({ theme, toggleTheme }: { theme: 'dark' | 'light'; toggleT
         boxShadow: theme === 'dark' 
           ? '0 10px 30px -10px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255,255,255,0.05)'
           : '0 10px 30px -10px rgba(0, 0, 0, 0.15)',
-        direction: dir,
+        direction: 'ltr',
         cursor: 'grab',
         touchAction: 'none',
         transformOrigin: 'top',
@@ -1854,7 +1944,10 @@ function App() {
               </AnimatePresence>
             </main>
 
-            <FloatingDock theme={theme} toggleTheme={toggleTheme} />
+            {/* Force LTR coordinate system for Floating Dock to prevent offsets shifting on RTL language toggle */}
+            <div style={{ direction: 'ltr' }}>
+              <FloatingDock theme={theme} toggleTheme={toggleTheme} />
+            </div>
           </div>
         </Router>
       </DomainProvider>

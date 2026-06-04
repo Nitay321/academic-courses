@@ -169,7 +169,7 @@ a:hover {
 
 .btn-primary {
   background: var(--primary-color);
-  color: white;
+  color: var(--btn-primary-text, white);
   box-shadow: 0 4px 14px 0 rgba(99, 102, 241, 0.25);
 }
 
@@ -192,7 +192,7 @@ a:hover {
 
 .btn-accent {
   background: var(--accent-color);
-  color: white;
+  color: var(--btn-accent-text, white);
   box-shadow: 0 4px 14px 0 rgba(20, 184, 166, 0.25);
 }
 
@@ -468,7 +468,7 @@ a:hover {
 /* Primary / Indigo */
 .filter-btn-primary.active { 
   background: var(--primary-color) !important; 
-  color: white !important; 
+  color: var(--btn-primary-text, white) !important; 
   border-color: var(--primary-color) !important; 
   box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35) !important; 
 }
@@ -484,7 +484,7 @@ a:hover {
 /* Secondary / Pink */
 .filter-btn-secondary.active { 
   background: var(--secondary-color) !important; 
-  color: white !important; 
+  color: var(--btn-secondary-text, white) !important; 
   border-color: var(--secondary-color) !important; 
   box-shadow: 0 4px 14px rgba(236, 72, 153, 0.35) !important; 
 }
@@ -499,7 +499,7 @@ a:hover {
 /* Accent / Teal */
 .filter-btn-accent.active { 
   background: var(--accent-color) !important; 
-  color: white !important; 
+  color: var(--btn-accent-text, white) !important; 
   border-color: var(--accent-color) !important; 
   box-shadow: 0 4px 14px rgba(20, 184, 166, 0.35) !important; 
 }
@@ -514,7 +514,7 @@ a:hover {
 /* Success / Green */
 .filter-btn-success.active { 
   background: var(--success) !important; 
-  color: white !important; 
+  color: var(--btn-primary-text, white) !important; 
   border-color: var(--success) !important; 
   box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35) !important; 
 }
@@ -529,7 +529,7 @@ a:hover {
 /* Warning / Amber */
 .filter-btn-warning.active { 
   background: var(--warning) !important; 
-  color: white !important; 
+  color: var(--btn-accent-text, white) !important; 
   border-color: var(--warning) !important; 
   box-shadow: 0 4px 14px rgba(245, 158, 11, 0.35) !important; 
 }

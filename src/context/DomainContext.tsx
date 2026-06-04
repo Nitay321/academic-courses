@@ -31,6 +31,9 @@ export const DomainProvider: React.FC<{ children: React.ReactNode }> = ({ childr
 
       if (activeSubject.id === 'nla-opt') {
         if (isLightTheme) {
+          root.style.setProperty('--bg-color', '#f3f4f6');
+          root.style.setProperty('--surface-color', 'rgba(255, 255, 255, 0.75)');
+          root.style.setProperty('--surface-border', 'rgba(0, 0, 0, 0.08)');
           root.style.setProperty('--primary-color', '#4f46e5');
           root.style.setProperty('--secondary-color', '#d01d73');
           root.style.setProperty('--accent-color', '#0d9488');
@@ -39,7 +42,13 @@ export const DomainProvider: React.FC<{ children: React.ReactNode }> = ({ childr
           root.style.setProperty('--card-hover-border', 'rgba(79, 70, 229, 0.25)');
           root.style.setProperty('--navbar-bg', 'rgba(243, 244, 246, 0.8)');
           root.style.setProperty('--math-bg', '#e5e7eb');
+          root.style.setProperty('--btn-primary-text', 'white');
+          root.style.setProperty('--btn-secondary-text', 'white');
+          root.style.setProperty('--btn-accent-text', 'white');
         } else {
+          root.style.setProperty('--bg-color', '#0b0f19');
+          root.style.setProperty('--surface-color', 'rgba(15, 23, 42, 0.6)');
+          root.style.setProperty('--surface-border', 'rgba(255, 255, 255, 0.08)');
           root.style.setProperty('--primary-color', '#6366f1');
           root.style.setProperty('--secondary-color', '#ec4899');
           root.style.setProperty('--accent-color', '#14b8a6');
@@ -48,9 +57,15 @@ export const DomainProvider: React.FC<{ children: React.ReactNode }> = ({ childr
           root.style.setProperty('--card-hover-border', 'rgba(255, 255, 255, 0.18)');
           root.style.setProperty('--navbar-bg', 'rgba(11, 15, 25, 0.7)');
           root.style.setProperty('--math-bg', 'rgba(0, 0, 0, 0.25)');
+          root.style.setProperty('--btn-primary-text', 'white');
+          root.style.setProperty('--btn-secondary-text', 'white');
+          root.style.setProperty('--btn-accent-text', 'white');
         }
       } else if (activeSubject.id === 'prob-stats') {
         if (isLightTheme) {
+          root.style.setProperty('--bg-color', 'hsl(160, 25%, 97%)');
+          root.style.setProperty('--surface-color', 'rgba(240, 253, 249, 0.85)');
+          root.style.setProperty('--surface-border', 'rgba(16, 185, 129, 0.15)');
           root.style.setProperty('--primary-color', 'hsl(155, 75%, 32%)');
           root.style.setProperty('--secondary-color', 'hsl(185, 75%, 32%)');
           root.style.setProperty('--accent-color', 'hsl(38, 85%, 40%)');
@@ -59,7 +74,13 @@ export const DomainProvider: React.FC<{ children: React.ReactNode }> = ({ childr
           root.style.setProperty('--card-hover-border', 'rgba(16, 185, 129, 0.3)');
           root.style.setProperty('--navbar-bg', 'rgba(240, 253, 249, 0.85)');
           root.style.setProperty('--math-bg', '#e6f4ef');
+          root.style.setProperty('--btn-primary-text', '#051a10');
+          root.style.setProperty('--btn-secondary-text', '#021418');
+          root.style.setProperty('--btn-accent-text', '#1a0a00');
         } else {
+          root.style.setProperty('--bg-color', 'hsl(160, 20%, 6%)');
+          root.style.setProperty('--surface-color', 'rgba(10, 30, 22, 0.65)');
+          root.style.setProperty('--surface-border', 'rgba(16, 185, 129, 0.12)');
           root.style.setProperty('--primary-color', 'hsl(155, 85%, 42%)');
           root.style.setProperty('--secondary-color', 'hsl(185, 85%, 42%)');
           root.style.setProperty('--accent-color', 'hsl(45, 90%, 52%)');
@@ -68,6 +89,9 @@ export const DomainProvider: React.FC<{ children: React.ReactNode }> = ({ childr
           root.style.setProperty('--card-hover-border', 'rgba(16, 185, 129, 0.28)');
           root.style.setProperty('--navbar-bg', 'rgba(8, 24, 18, 0.75)');
           root.style.setProperty('--math-bg', 'rgba(0, 0, 0, 0.28)');
+          root.style.setProperty('--btn-primary-text', '#051a10');
+          root.style.setProperty('--btn-secondary-text', '#021418');
+          root.style.setProperty('--btn-accent-text', '#1a0a00');
         }
       }
     };
